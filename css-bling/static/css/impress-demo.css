@@ -1,0 +1,1246 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/*
+    Now here is when interesting things start to appear.
+
+    We set up <body> styles with default font and nice gradient in the background.
+    And yes, there is a lot of repetition there because of -prefixes but we don't
+    want to leave anybody behind.
+*/
+body {
+    font-family: 'PT Sans', sans-serif;
+    min-height: 740px;
+
+    background: #fcfff4; /* Old browsers */
+    background: -moz-linear-gradient(top,  #fcfff4 0%, #e9e9ce 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfff4), color-stop(100%,#e9e9ce)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #fcfff4 0%,#e9e9ce 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #fcfff4 0%,#e9e9ce 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #fcfff4 0%,#e9e9ce 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #fcfff4 0%,#e9e9ce 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#e9e9ce',GradientType=0 ); /* IE6-9 */
+}
+
+/*
+    Now let's bring some text styles back ...
+*/
+b, strong { font-weight: bold }
+i, em { font-style: italic }
+
+/*
+    ... and give links a nice look.
+*/
+a {
+    color: inherit;
+    text-decoration: none;
+    padding: 0 0.1em;
+    background: rgba(255,255,255,0.5);
+    text-shadow: -1px -1px 2px rgba(100,100,100,0.9);
+    border-radius: 0.2em;
+
+    -webkit-transition: 0.5s;
+    -moz-transition:    0.5s;
+    -ms-transition:     0.5s;
+    -o-transition:      0.5s;
+    transition:         0.5s;
+}
+
+a:hover,
+a:focus {
+    background: rgba(255,255,255,1);
+    text-shadow: -1px -1px 2px rgba(100,100,100,0.5);
+}
+
+/*
+    Because the main point behind the impress.js demo is to demo impress.js
+    we display a fallback message for users with browsers that don't support
+    all the features required by it.
+
+    All of the content will be still fully accessible for them, but I want
+    them to know that they are missing something - that's what the demo is
+    about, isn't it?
+
+    And then we hide the message, when support is detected in the browser.
+*/
+
+.fallback-message {
+    font-family: sans-serif;
+    line-height: 1.3;
+
+    width: 780px;
+    padding: 10px 10px 0;
+    margin: 20px auto;
+
+    border: 1px solid #E4C652;
+    border-radius: 10px;
+    background: #EEDC94;
+}
+
+.fallback-message p {
+    margin-bottom: 10px;
+}
+
+.impress-supported .fallback-message {
+    display: none;
+}
+
+/*
+    Now let's style the presentation steps.
+
+    We start with basics to make sure it displays correctly in everywhere ...
+*/
+
+.step {
+    position: relative;
+    width: 900px;
+    padding: 40px;
+    margin: 20px auto;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing:    border-box;
+    -ms-box-sizing:     border-box;
+    -o-box-sizing:      border-box;
+    box-sizing:         border-box;
+
+    font-family: 'PT Serif', georgia, serif;
+    font-size: 48px;
+    line-height: 1.5;
+}
+
+/*
+    ... and we enhance the styles for impress.js.
+
+    Basically we remove the margin and make inactive steps a little bit transparent.
+*/
+.impress-enabled .step {
+    margin: 0;
+    opacity: 0;
+
+    -webkit-transition: opacity 1s;
+    -moz-transition:    opacity 1s;
+    -ms-transition:     opacity 1s;
+    -o-transition:      opacity 1s;
+    transition:         opacity 1s;
+}
+
+.impress-enabled .step.active { opacity: 1 }
+
+/*
+    These 'slide' step styles were heavily inspired by HTML5 Slides:
+    http://html5slides.googlecode.com/svn/trunk/styles.css
+
+    ;)
+
+    They cover everything what you see on first three steps of the demo.
+*/
+.slide {
+    display: block;
+
+    width: 900px;
+    height: 722px;
+    /*padding: 40px 60px;*/
+
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, .3);
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
+
+    color: rgb(102, 102, 102);
+    text-shadow: 0 2px 2px rgba(0, 0, 0, .1);
+
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: -1px;
+}
+
+.slide q {
+    display: block;
+    font-size: 50px;
+    line-height: 72px;
+
+    margin-top: 100px;
+}
+
+.slide q strong {
+    white-space: nowrap;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*
+    And now we start to style each step separately.
+
+    I agree that this may be not the most efficient, object-oriented and
+    scalable way of styling, but most of steps have quite a custom look
+    and typography tricks here and there, so they had to be styles separately.
+
+    First is the title step with a big <h1> (no room for padding) and some
+    3D positioning along Z axis.
+*/
+.underline {
+    text-decoration: underline;
+}
+
+.blue {
+    color: #1240AB;
+}
+
+.rounded-corners {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    width: 350px;
+    background: #cccccc;
+    color: #000;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.gradient {
+    background: #f0b7a1; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f0b7a1 0%, #8c3310 50%, #752201 51%, #bf6e4e 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0b7a1), color-stop(50%,#8c3310), color-stop(51%,#752201), color-stop(100%,#bf6e4e)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #f0b7a1 0%,#8c3310 50%,#752201 51%,#bf6e4e 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #f0b7a1 0%,#8c3310 50%,#752201 51%,#bf6e4e 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #f0b7a1 0%,#8c3310 50%,#752201 51%,#bf6e4e 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #f0b7a1 0%,#8c3310 50%,#752201 51%,#bf6e4e 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0b7a1', endColorstr='#bf6e4e',GradientType=0 ); /* IE6-9 */
+}
+
+.chequered {
+    clear: both;
+    width: 20px;
+    height: 20px;
+    background: black;
+    margin: 10px 5px;
+    border-radius: 1px;
+    box-shadow:
+        0 40px 0 0 #000,
+        0 80px 0 0 #000,
+
+        20px 20px 0 0 #000,
+        20px 60px 0 0 #000,
+
+        40px 0 0 0 #333333,
+        40px 40px 0 0 #333333,
+        40px 80px 0 0 #333333,
+
+        60px 20px 0 0 #666666,
+        60px 60px 0 0 #666666,
+
+        80px 0 0 0 #999999,
+        80px 40px 0 0 #999999,
+        80px 80px 0 0 #999999,
+
+        100px 20px 0 0 #cccccc,
+        100px 60px 0 0 #cccccc,
+
+        120px 0 0 0 #999999,
+        120px 40px 0 0 #999999,
+        120px 80px 0 0 #999999,
+
+        140px 20px 0 0 #666666,
+        140px 60px 0 0 #666666,
+
+        160px 0 0 0 #333333,
+        160px 40px 0 0 #333333,
+        160px 80px 0 0 #333333,
+
+        180px 20px 0 0 #000,
+        180px 60px 0 0 #000,
+
+        200px 0 0 0 #000,
+        200px 40px 0 0 #000,
+        200px 80px 0 0 #000
+        ;
+}
+
+.web-font {
+    font-family: 'Metal Mania', cursive;
+    font-weight:300;
+    font-size: 2em;
+    color: gold;
+    -webkit-filter:
+        drop-shadow(5px 5px 10px #333);
+}
+
+.transition {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+
+    -webkit-transition:
+       background-color 0.5s ease-in-out,
+       width 0.5s ease-in;
+    -moz-transition:
+       background-color 0.5s ease-in-out,
+       width 0.5s ease-in;
+    -o-transition:
+       background-color 0.5s ease-in-out,
+       width 0.5s ease-in;
+}
+
+.transition:hover {
+    width: 500px;
+    background-color: #b8860b;
+}
+
+.transformed {
+    position: relative;
+    top: 40px;
+
+    -webkit-transform: scale(0.8) scaleZ(1.0) rotateX(30deg) rotateY(-10deg);
+    -webkit-transform-origin: 0% 0%;
+    -webkit-perspective: 200;
+    -webkit-perspective-origin: 50% 50%;
+    -webkit-transition: 1s all ease-in-out;
+}
+
+.transformed:hover {
+    -webkit-transform: scale(0.8) scaleZ(2.0) rotateX(30deg) rotateY(-10deg) rotateZ(20deg) skewX(30deg);
+    -webkit-transform-origin: 0% 0%;
+    -webkit-perspective: 200;
+    -webkit-perspective-origin: 50% 50%;
+    left: 100px;
+    background: yellow;
+}
+
+.filtered {
+    -webkit-filter: grayscale(0.2)
+        sepia(0.1)
+        saturate(0.95)
+        hue-rotate(40deg)
+        invert(0)
+        opacity(0.8)
+        brightness(0.6)
+        contrast(1)
+        blur(0px)
+        drop-shadow(5px 5px 10px #ccc);
+}
+
+@-webkit-keyframes resize {
+  0% {
+    padding: 0;
+  }
+  50% {
+    -webkit-transform: scale(0.8) scaleZ(1.0) rotateX(45deg) rotateY(90deg);
+    zoom: 300%;
+    box-shadow: 40px 40px 0 0 #ccc;
+  }
+  100% {
+
+    background-color:rgba(255,0,0,0.9);
+    -webkit-transform: scale(0.8) scaleZ(1.0) rotateX(0deg) rotateY(180deg);
+    -webkit-transform-origin: 0% 0%;
+    -webkit-perspective: 100;
+    -webkit-perspective-origin: 50% 50%;
+    box-shadow: 20px 20px 0 0 #ccc;
+  }
+}
+
+.animated {
+    background-image: url(data:image/gif;base64,R0lGODlhPQBEAPeoAJosM//AwO/AwHVYZ/z595kzAP/s7P+goOXMv8+fhw/v739/f+8PD98fH/8mJl+fn/9ZWb8/PzWlwv///6wWGbImAPgTEMImIN9gUFCEm/gDALULDN8PAD6atYdCTX9gUNKlj8wZAKUsAOzZz+UMAOsJAP/Z2ccMDA8PD/95eX5NWvsJCOVNQPtfX/8zM8+QePLl38MGBr8JCP+zs9myn/8GBqwpAP/GxgwJCPny78lzYLgjAJ8vAP9fX/+MjMUcAN8zM/9wcM8ZGcATEL+QePdZWf/29uc/P9cmJu9MTDImIN+/r7+/vz8/P8VNQGNugV8AAF9fX8swMNgTAFlDOICAgPNSUnNWSMQ5MBAQEJE3QPIGAM9AQMqGcG9vb6MhJsEdGM8vLx8fH98AANIWAMuQeL8fABkTEPPQ0OM5OSYdGFl5jo+Pj/+pqcsTE78wMFNGQLYmID4dGPvd3UBAQJmTkP+8vH9QUK+vr8ZWSHpzcJMmILdwcLOGcHRQUHxwcK9PT9DQ0O/v70w5MLypoG8wKOuwsP/g4P/Q0IcwKEswKMl8aJ9fX2xjdOtGRs/Pz+Dg4GImIP8gIH0sKEAwKKmTiKZ8aB/f39Wsl+LFt8dgUE9PT5x5aHBwcP+AgP+WltdgYMyZfyywz78AAAAAAAD///8AAP9mZv///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAKgALAAAAAA9AEQAAAj/AFEJHEiwoMGDCBMqXMiwocAbBww4nEhxoYkUpzJGrMixogkfGUNqlNixJEIDB0SqHGmyJSojM1bKZOmyop0gM3Oe2liTISKMOoPy7GnwY9CjIYcSRYm0aVKSLmE6nfq05QycVLPuhDrxBlCtYJUqNAq2bNWEBj6ZXRuyxZyDRtqwnXvkhACDV+euTeJm1Ki7A73qNWtFiF+/gA95Gly2CJLDhwEHMOUAAuOpLYDEgBxZ4GRTlC1fDnpkM+fOqD6DDj1aZpITp0dtGCDhr+fVuCu3zlg49ijaokTZTo27uG7Gjn2P+hI8+PDPERoUB318bWbfAJ5sUNFcuGRTYUqV/3ogfXp1rWlMc6awJjiAAd2fm4ogXjz56aypOoIde4OE5u/F9x199dlXnnGiHZWEYbGpsAEA3QXYnHwEFliKAgswgJ8LPeiUXGwedCAKABACCN+EA1pYIIYaFlcDhytd51sGAJbo3onOpajiihlO92KHGaUXGwWjUBChjSPiWJuOO/LYIm4v1tXfE6J4gCSJEZ7YgRYUNrkji9P55sF/ogxw5ZkSqIDaZBV6aSGYq/lGZplndkckZ98xoICbTcIJGQAZcNmdmUc210hs35nCyJ58fgmIKX5RQGOZowxaZwYA+JaoKQwswGijBV4C6SiTUmpphMspJx9unX4KaimjDv9aaXOEBteBqmuuxgEHoLX6Kqx+yXqqBANsgCtit4FWQAEkrNbpq7HSOmtwag5w57GrmlJBASEU18ADjUYb3ADTinIttsgSB1oJFfA63bduimuqKB1keqwUhoCSK374wbujvOSu4QG6UvxBRydcpKsav++Ca6G8A6Pr1x2kVMyHwsVxUALDq/krnrhPSOzXG1lUTIoffqGR7Goi2MAxbv6O2kEG56I7CSlRsEFKFVyovDJoIRTg7sugNRDGqCJzJgcKE0ywc0ELm6KBCCJo8DIPFeCWNGcyqNFE06ToAfV0HBRgxsvLThHn1oddQMrXj5DyAQgjEHSAJMWZwS3HPxT/QMbabI/iBCliMLEJKX2EEkomBAUCxRi42VDADxyTYDVogV+wSChqmKxEKCDAYFDFj4OmwbY7bDGdBhtrnTQYOigeChUmc1K3QTnAUfEgGFgAWt88hKA6aCRIXhxnQ1yg3BCayK44EWdkUQcBByEQChFXfCB776aQsG0BIlQgQgE8qO26X1h8cEUep8ngRBnOy74E9QgRgEAC8SvOfQkh7FDBDmS43PmGoIiKUUEGkMEC/PJHgxw0xH74yx/3XnaYRJgMB8obxQW6kL9QYEJ0FIFgByfIL7/IQAlvQwEpnAC7DtLNJCKUoO/w45c44GwCXiAFB/OXAATQryUxdN4LfFiwgjCNYg+kYMIEFkCKDs6PKAIJouyGWMS1FSKJOMRB/BoIxYJIUXFUxNwoIkEKPAgCBZSQHQ1A2EWDfDEUVLyADj5AChSIQW6gu10bE/JG2VnCZGfo4R4d0sdQoBAHhPjhIB94v/wRoRKQWGRHgrhGSQJxCS+0pCZbEhAAOw==);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-origin: border-box;
+}
+
+.animated:hover {
+  -webkit-animation-name: resize;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: 4;
+  -webkit-animation-direction: alternate;
+}
+
+.stop-sign {
+    width: 100%;
+    height: 600px;
+    background-image: url(data:image/png;base64,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);
+    background-repeat: no-repeat;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.x-large-text {
+    font-size: 120px;
+}
+
+.large-text {
+    font-size: 100px;
+
+}
+
+.medium-text {
+    font-size: 80px;
+
+}
+
+.small-text {
+    font-size: 60px;
+
+}
+
+.x-small-text {
+    font-size: 40px;
+
+}
+
+.xx-small-text {
+    font-size: 20px;
+
+}
+
+#bling {
+    margin: 0 auto;
+    width: 600px;
+    height: 600px;
+}
+
+#not-hal {
+    height: 700px;
+    background: url(../img/hal9000.png) no-repeat;
+}
+
+#not-sauron {
+    height: 700px;
+    background: url(../img/Sauron.jpg) no-repeat;
+}
+
+#not-chuck {
+    height: 700px;
+    background: url(../img/chuk-big-data.jpg) no-repeat;
+}
+
+#synthesys {
+    height: 700px;
+    background: url(../img/synthesys.jpg) no-repeat;
+}
+
+#dr-intro {
+    height: 700px;
+    background: url(../img/digitalreasoning-logo.jpg) no-repeat;
+}
+
+#title {
+    padding: 0;
+}
+
+#title .try {
+    font-size: 64px;
+    position: absolute;
+    top: -0.5em;
+    left: 1.5em;
+
+    -webkit-transform: translateZ(20px);
+    -moz-transform:    translateZ(20px);
+    -ms-transform:     translateZ(20px);
+    -o-transform:      translateZ(20px);
+    transform:         translateZ(20px);
+}
+
+#title h1 {
+    font-size: 190px;
+
+    -webkit-transform: translateZ(50px);
+    -moz-transform:    translateZ(50px);
+    -ms-transform:     translateZ(50px);
+    -o-transform:      translateZ(50px);
+    transform:         translateZ(50px);
+}
+
+#title .footnote {
+    font-size: 32px;
+}
+
+#title #about {
+    font-size: 150px;
+}
+
+#mountain {
+    background: url(../img/clouds.jpg);
+    opacity:0.333;
+    position: relative;
+    top: -2.8em;
+}
+
+#intro-text {
+    position: relative;
+    top: -14.0em;
+}
+
+#intro h1 {
+    font-size: 110px;
+    text-align: center;
+}
+
+#intro p {
+    font-size: 50px;
+    text-align: center;
+    line-height: 3.0em;
+}
+
+#bd-start h1 {
+    font-size: 140px;
+}
+
+#bd-start h1 {
+    font-size: 140px;
+}
+
+#io h1 {
+    font-size: 100px;
+}
+
+#forks p {
+    margin: 25px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+    Second step is nothing special, just a text with a link, so it doesn't need
+    any special styling.
+
+    Let's move to 'big thoughts' with centered text and custom font sizes.
+*/
+#big {
+    width: 600px;
+    text-align: center;
+    font-size: 60px;
+    line-height: 1;
+}
+
+#big b {
+    display: block;
+    font-size: 250px;
+    line-height: 250px;
+}
+
+#big .thoughts {
+    font-size: 90px;
+    line-height: 150px;
+}
+
+/*
+    'Tiny ideas' just need some tiny styling.
+*/
+#tiny {
+    width: 500px;
+    text-align: center;
+}
+
+/*
+    This step has some animated text ...
+*/
+#ing { width: 500px }
+
+/*
+    ... so we define display to `inline-block` to enable transforms and
+    transition duration to 0.5s ...
+*/
+#ing b {
+    display: inline-block;
+    -webkit-transition: 0.5s;
+    -moz-transition:    0.5s;
+    -ms-transition:     0.5s;
+    -o-transition:      0.5s;
+    transition:         0.5s;
+}
+
+/*
+    ... and we want 'positioning` word to move up a bit when the step gets
+    `present` class ...
+*/
+#ing.present .positioning {
+    -webkit-transform: translateY(-10px);
+    -moz-transform:    translateY(-10px);
+    -ms-transform:     translateY(-10px);
+    -o-transform:      translateY(-10px);
+    transform:         translateY(-10px);
+}
+
+/*
+    ... 'rotating' to rotate quater of a second later ...
+*/
+#ing.present .rotating {
+    -webkit-transform: rotate(-10deg);
+    -moz-transform:    rotate(-10deg);
+    -ms-transform:     rotate(-10deg);
+    -o-transform:      rotate(-10deg);
+    transform:         rotate(-10deg);
+
+    -webkit-transition-delay: 0.25s;
+    -moz-transition-delay:    0.25s;
+    -ms-transition-delay:     0.25s;
+    -o-transition-delay:      0.25s;
+    transition-delay:         0.25s;
+}
+
+/*
+    ... and 'scaling' to scale down after another quater of a second.
+*/
+#ing.present .scaling {
+    -webkit-transform: scale(0.7);
+    -moz-transform:    scale(0.7);
+    -ms-transform:     scale(0.7);
+    -o-transform:      scale(0.7);
+    transform:         scale(0.7);
+
+    -webkit-transition-delay: 0.5s;
+    -moz-transition-delay:    0.5s;
+    -ms-transition-delay:     0.5s;
+    -o-transition-delay:      0.5s;
+    transition-delay:         0.5s;
+}
+
+/*
+    The 'imagination' step is again some boring font-sizing.
+*/
+
+#imagination {
+    width: 600px;
+}
+
+#imagination .imagination {
+    font-size: 78px;
+}
+
+/*
+    There is nothing really special about 'use the source, Luke' step, too,
+    except maybe of the Yoda background.
+
+    As you can see below I've 'hard-coded' it in data URL.
+    That's not the best way to serve images, but because that's just this one
+    I decided it will be OK to have it this way.
+
+    Just make sure you don't blindly copy this approach.
+*/
+#source {
+    width: 700px;
+    padding-bottom: 300px;
+
+    /* Yoda Icon :: Pixel Art from Star Wars http://www.pixeljoint.com/pixelart/1423.htm */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARgAAAEYCAMAAACwUBm+AAAAAXNSR0IArs4c6QAAAKtQTFRFsAAAvbWSLUUrLEQqY1s8UYJMqJ1vNTEgOiIdIzYhjIFVLhsXZ6lgSEIsP2U8JhcCVzMsSXZEgXdOO145XJdWOl03LzAYMk4vSXNExr+hwcuxRTs1Qmk+RW9Am49eFRANQz4pUoNMQWc+OSMDTz0wLBsCNVMxa2NBOyUDUoNNSnlEWo9VRGxAVzYFl6tXCggHbLNmMUIcHhwTXkk5f3VNRT8wUT8xAAAACQocRBWFFwAAAAF0Uk5TAEDm2GYAAAPCSURBVHja7d3JctNAFIZRMwRCCGEmzPM8z/D+T8bu/ptbXXJFdij5fMt2Wuo+2UgqxVmtttq5WVotLzBgwIABAwYMGDCn0qVqbo69psPqVpWx+1XG5iaavF8wYMCAAQMGDBgwi4DJ6Y6qkxB1HNlcN3a92gbR5P2CAQMGDBgwYMCAWSxMlrU+UY5yu2l9okfV4bAxUVbf7TJnAwMGDBgwYMCAAbMLMHeqbGR82Zy+VR1Ht81nVca6R+UdTLaU24Ruzd3qM/e4yjnAgAEDBgwYMGDA7AJMd1l/3NRdVGcj3eX/2WEhCmDGxnM7yqygu8XIPjJj8iN/MGDAgAEDBgwYMAuDGb8q0RGlLCHLv1t9qDKWn3vdNHVuEI6HPaxO9Jo3GDBgwIABAwYMmIXBdC9ShGgMk+XnkXUeuGcsP/e1+lhNnZsL/G5Vs3OAAQMGDBgwYMCAWSxMR3SzOmraG5atdy9wZKzb+vg16qyqe2FltbnAgAEDBgwYMGDALAxmTJSuN3WA76rnVca6GTnemGN1WoEBAwYMGDBgwIBZGMxUomy4+xO899V4LAg5Xnc2MGDAgAEDBgwYMGA218Wq+2K1LDqvY9xZu8zN8fICdM6btYABAwYMGDBgwIABMzfH0+pGU5afze2tXebmeAfVz+p8BQYMGDBgwIABAwbMPBzZ+oWmfJrln1273FhkbHzee9WWbw7AgAEDBgwYMGDALAKm43hcdctKgblcPamOhuXnXlY5Xs6bsW4FGyQCAwYMGDBgwIABswiYMceZKgvMo+h8mrHLTdn676rj+FEFoTtHd8MwOxEYMGDAgAEDBgyYRcBM5UhXqiymW3R3c9ARhWO/OmjqfjVZy+xEYMCAAQMGDBgwYBYG073OnCV0RFNhMhaOa9WfKmOB6XjHMN1tQmaAAQMGDBgwYMCA2VWY7vXjz1U4croAzgPztwIDBgwYMGDAgAEDZhswh035NBw59Dww3RgYMGDAgAEDBgwYMJuD6f4tXT7NUqfCdBvZLkxXdgQGDBgwYMCAAQNmt2DGj8WzwAfV/w7T/aq7mxwwYMCAAQMGDBgwuwqTOo7uTwTngflSzQ3TdaJvAwEDBgwYMGDAgAED5gSvgbyo5oHZ4Pc+gwEDBgwYMGDAgAEzhOm+5G0qTGaAAQMGDBgwYMCAAXNaMOcnls3tNwWm+zRzp54NDBgwYMCAAQMGDJh5YNL36k1TLuGvVq+qnKMbS5n7tulT9asCAwYMGDBgwIABA2ZumKuztLnjgQEDBgwYMGDAgNl5mH/4/ltKA6vBNAAAAABJRU5ErkJggg==);
+    background-position: bottom right;
+    background-repeat: no-repeat;
+}
+
+#source q {
+    font-size: 60px;
+}
+
+/*
+    And the "it's in 3D" step again brings some 3D typography - just for fun.
+
+    Because we want to position <span> elements in 3D we set transform-style to
+    `preserve-3d` on the paragraph.
+    It is not needed by webkit browsers, but it is in Firefox. It's hard to say
+    which behaviour is correct as 3D transforms spec is not very clear about it.
+*/
+.its-in-3d p {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style:    preserve-3d; /* Y U need this Firefox?! */
+    -ms-transform-style:     preserve-3d;
+    -o-transform-style:      preserve-3d;
+    transform-style:         preserve-3d;
+}
+
+/*
+    Below we position each word separately along Z axis and we want it to transition
+    to default position in 0.5s when the step gets `present` class.
+
+    Quite a simple idea, but lot's of styles and prefixes.
+*/
+.its-in-3d span,
+.its-in-3d b {
+    display: inline-block;
+    -webkit-transform: translateZ(40px);
+    -moz-transform:    translateZ(40px);
+    -ms-transform:     translateZ(40px);
+    -o-transform:      translateZ(40px);
+     transform:        translateZ(40px);
+
+    -webkit-transition: 0.5s;
+    -moz-transition:    0.5s;
+    -ms-transition:     0.5s;
+    -o-transition:      0.5s;
+    transition:         0.5s;
+}
+
+.its-in-3d .have {
+    -webkit-transform: translateZ(-40px);
+    -moz-transform:    translateZ(-40px);
+    -ms-transform:     translateZ(-40px);
+    -o-transform:      translateZ(-40px);
+    transform:         translateZ(-40px);
+}
+
+.its-in-3d .you {
+    -webkit-transform: translateZ(20px);
+    -moz-transform:    translateZ(20px);
+    -ms-transform:     translateZ(20px);
+    -o-transform:      translateZ(20px);
+    transform:         translateZ(20px);
+}
+
+.its-in-3d .noticed {
+    -webkit-transform: translateZ(-40px);
+    -moz-transform:    translateZ(-40px);
+    -ms-transform:     translateZ(-40px);
+    -o-transform:      translateZ(-40px);
+    transform:         translateZ(-40px);
+}
+
+.its-in-3d .its {
+    -webkit-transform: translateZ(60px);
+    -moz-transform:    translateZ(60px);
+    -ms-transform:     translateZ(60px);
+    -o-transform:      translateZ(60px);
+    transform:         translateZ(60px);
+}
+
+.its-in-3d .in {
+    -webkit-transform: translateZ(-10px);
+    -moz-transform:    translateZ(-10px);
+    -ms-transform:     translateZ(-10px);
+    -o-transform:      translateZ(-10px);
+    transform:         translateZ(-10px);
+}
+
+.its-in-3d .footnote {
+    font-size: 32px;
+
+    -webkit-transform: translateZ(-10px);
+    -moz-transform:    translateZ(-10px);
+    -ms-transform:     translateZ(-10px);
+    -o-transform:      translateZ(-10px);
+    transform:         translateZ(-10px);
+}
+
+.its-in-3d.present span,
+.its-in-3d.present b {
+    -webkit-transform: translateZ(0px);
+    -moz-transform:    translateZ(0px);
+    -ms-transform:     translateZ(0px);
+    -o-transform:      translateZ(0px);
+    transform:         translateZ(0px);
+}
+
+/*
+    The last step is an overview.
+    There is no content in it, so we make sure it's not visible because we want
+    to be able to click on other steps.
+
+*/
+#overview { display: none }
+
+/*
+    We also make other steps visible and give them a pointer cursor using the
+    `impress-on-` class.
+*/
+.impress-on-overview .step {
+    opacity: 1;
+    cursor: pointer;
+}
+
+
+/*
+    Now, when we have all the steps styled let's give users a hint how to navigate
+    around the presentation.
+
+    The best way to do this would be to use JavaScript, show a delayed hint for a
+    first time users, then hide it and store a status in cookie or localStorage...
+
+    But I wanted to have some CSS fun and avoid additional scripting...
+
+    Let me explain it first, so maybe the transition magic will be more readable
+    when you read the code.
+
+    First of all I wanted the hint to appear only when user is idle for a while.
+    You can't detect the 'idle' state in CSS, but I delayed a appearing of the
+    hint by 5s using transition-delay.
+
+    You also can't detect in CSS if the user is a first-time visitor, so I had to
+    make an assumption that I'll only show the hint on the first step. And when
+    the step is changed hide the hint, because I can assume that user already
+    knows how to navigate.
+
+    To summarize it - hint is shown when the user is on the first step for longer
+    than 5 seconds.
+
+    The other problem I had was caused by the fact that I wanted the hint to fade
+    in and out. It can be easily achieved by transitioning the opacity property.
+    But that also meant that the hint was always on the screen, even if totally
+    transparent. It covered part of the screen and you couldn't correctly clicked
+    through it.
+    Unfortunately you cannot transition between display `block` and `none` in pure
+    CSS, so I needed a way to not only fade out the hint but also move it out of
+    the screen.
+
+    I solved this problem by positioning the hint below the bottom of the screen
+    with CSS transform and moving it up to show it. But I also didn't want this move
+    to be visible. I wanted the hint only to fade in and out visually, so I delayed
+    the fade in transition, so it starts when the hint is already in its correct
+    position on the screen.
+
+    I know, it sounds complicated ... maybe it would be easier with the code?
+*/
+
+.hint {
+    /*
+        We hide the hint until presentation is started and from browsers not supporting
+        impress.js, as they will have a linear scrollable view ...
+    */
+    display: none;
+
+    /*
+        ... and give it some fixed position and nice styles.
+    */
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 200px;
+
+    background: rgba(0,0,0,0.5);
+    color: #EEE;
+    text-align: center;
+
+    font-size: 50px;
+    padding: 20px;
+
+    z-index: 100;
+
+    /*
+        By default we don't want the hint to be visible, so we make it transparent ...
+    */
+    opacity: 0;
+
+    /*
+        ... and position it below the bottom of the screen (relative to it's fixed position)
+    */
+    -webkit-transform: translateY(400px);
+    -moz-transform:    translateY(400px);
+    -ms-transform:     translateY(400px);
+    -o-transform:      translateY(400px);
+    transform:         translateY(400px);
+
+    /*
+        Now let's imagine that the hint is visible and we want to fade it out and move out
+        of the screen.
+
+        So we define the transition on the opacity property with 1s duration and another
+        transition on transform property delayed by 1s so it will happen after the fade out
+        on opacity finished.
+
+        This way user will not see the hint moving down.
+    */
+    -webkit-transition: opacity 1s, -webkit-transform 0.5s 1s;
+    -moz-transition:    opacity 1s,    -moz-transform 0.5s 1s;
+    -ms-transition:     opacity 1s,     -ms-transform 0.5s 1s;
+    -o-transition:      opacity 1s,      -o-transform 0.5s 1s;
+    transition:         opacity 1s,         transform 0.5s 1s;
+}
+
+/*
+    Now we 'enable' the hint when presentation is initialized ...
+*/
+.impress-enabled .hint { display: block }
+
+/*
+    ... and we will show it when the first step (with id 'bored') is active.
+*/
+.impress-on-bored .hint {
+    /*
+        We remove the transparency and position the hint in its default fixed
+        position.
+    */
+    opacity: 1;
+
+    -webkit-transform: translateY(0px);
+    -moz-transform:    translateY(0px);
+    -ms-transform:     translateY(0px);
+    -o-transform:      translateY(0px);
+    transform:         translateY(0px);
+
+    /*
+        Now for fade in transition we have the oposite situation from the one
+        above.
+
+        First after 4.5s delay we animate the transform property to move the hint
+        into its correct position and after that we fade it in with opacity
+        transition.
+    */
+    -webkit-transition: opacity 1s 5s, -webkit-transform 0.5s 4.5s;
+    -moz-transition:    opacity 1s 5s,    -moz-transform 0.5s 4.5s;
+    -ms-transition:     opacity 1s 5s,     -ms-transform 0.5s 4.5s;
+    -o-transition:      opacity 1s 5s,      -o-transform 0.5s 4.5s;
+    transition:         opacity 1s 5s,         transform 0.5s 4.5s;
+}
+
+/*
+    And as the last thing there is a workaround for quite strange bug.
+    It happens a lot in Chrome. I don't remember if I've seen it in Firefox.
+
+    Sometimes the element positioned in 3D (especially when it's moved back
+    along Z axis) is not clickable, because it falls 'behind' the <body>
+    element.
+
+    To prevent this, I decided to make <body> non clickable by setting
+    pointer-events property to `none` value.
+    Value if this property is inherited, so to make everything else clickable
+    I bring it back on the #impress element.
+
+    If you want to know more about `pointer-events` here are some docs:
+    https://developer.mozilla.org/en/CSS/pointer-events
+
+    There is one very important thing to notice about this workaround - it makes
+    everything 'unclickable' except what's in #impress element.
+
+    So use it wisely ... or don't use at all.
+*/
+.impress-enabled          { pointer-events: none }
+.impress-enabled #impress { pointer-events: auto }
+
+/*
+    There is one funny thing I just realized.
+
+    Thanks to this workaround above everything except #impress element is invisible
+    for click events. That means that the hint element is also not clickable.
+    So basically all of this transforms and delayed transitions trickery was probably
+    not needed at all...
+
+    But it was fun to learn about it, wasn't it?
+*/
+
+/*
+    That's all I have for you in this file.
+    Thanks for reading. I hope you enjoyed it at least as much as I enjoyed writing it
+    for you.
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+    ===================================================================================
+    L O A D I N G   A N I M A T I O N   S T Y L E S
+    ===================================================================================
+ */
+.large-whirlpool {
+  top: -150px;
+  left: 170px;
+  height: 300px;
+  width: 300px;
+  z-index: 20000;
+  position: absolute;
+  font-family: 'Lucida Grande', tahoma, Helvetica, sans-serif;
+  color: #778899;
+}
+.large-whirlpool .whirlpool-text {
+  font-size: 0.65em;
+  position: absolute;
+  text-align: center;
+  width: 300px;
+  top: 135px;
+}
+.large-whirlpool .whirlpool-outer-circle {
+  box-shadow: 0 0 40px #2187e7;
+  width: 300px;
+  height: 300px;
+  border: 10px solid rgba(0, 183, 229, 0.9);
+  border-right: 5px solid rgba(0, 0, 0, 0);
+  border-left: 5px solid rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  opacity: .9;
+  margin: 0 auto;
+  border-radius: 200px;
+  -webkit-border-radius: 200px;
+  -moz-border-radius: 200px;
+  -o-border-radius: 200px;
+  top: -300px;
+  -moz-animation: spinPulse 5s infinite ease-in-out;
+  -webkit-animation: spinPulse 5s infinite linear;
+}
+.large-whirlpool .whirlpool-inner-circle {
+  box-shadow: 0 0 15px #2187e7;
+  width: 240px;
+  height: 240px;
+  border: 8px solid rgba(0, 183, 229, 0.9);
+  border-right: 5px solid rgba(0, 0, 0, 0);
+  border-left: 5px solid rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  opacity: .9;
+  margin: 0 auto;
+  border-radius: 150px;
+  -webkit-border-radius: 150px;
+  -moz-border-radius: 150px;
+  -o-border-radius: 150px;
+  top: -285px;
+  position: relative;
+  -moz-animation: spinoffPulse 10s infinite linear;
+  -webkit-animation: spinoffPulse 10s infinite linear;
+}
+.large-whirlpool .whirlpool-small-circle {
+  box-shadow: 0 0 6px #2187e7;
+  width: 180px;
+  height: 180px;
+  border: 6px solid rgba(0, 183, 229, 0.9);
+  border-right: 5px solid rgba(0, 0, 0, 0);
+  border-left: 5px solid rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  opacity: .9;
+  margin: 0 auto;
+  border-radius: 110px;
+  -webkit-border-radius: 110px;
+  -moz-border-radius: 110px;
+  -o-border-radius: 110px;
+  top: -510px;
+  position: relative;
+  opacity: 0.5;
+  -moz-animation: reverseSpinoffPulse 20s infinite linear;
+  -webkit-animation: reverseSpinoffPulse 20s infinite linear;
+}
+.small-whirlpool {
+  height: 100px;
+  width: 100px;
+  z-index: 20000;
+  position: absolute;
+  font-family: 'Lucida Grande', tahoma, Helvetica, sans-serif;
+  color: #778899;
+}
+.small-whirlpool .whirlpool-text {
+  font-size: 1em;
+  position: absolute;
+  text-align: center;
+  width: 100px;
+  top: 45px;
+}
+.small-whirlpool .whirlpool-outer-circle {
+  box-shadow: 0 0 40px #2187e7;
+  width: 100px;
+  height: 100px;
+  border: 4px solid rgba(0, 183, 229, 0.9);
+  border-right: 5px solid rgba(0, 0, 0, 0);
+  border-left: 5px solid rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  opacity: .9;
+  margin: 0 auto;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -o-border-radius: 50px;
+  top: -100px;
+  -moz-animation: spinPulse 5s infinite ease-in-out;
+  -webkit-animation: spinPulse 5s infinite linear;
+}
+.small-whirlpool .whirlpool-inner-circle {
+  box-shadow: 0 0 15px #2187e7;
+  width: 80px;
+  height: 80px;
+  border: 3.2px solid rgba(0, 183, 229, 0.9);
+  border-right: 5px solid rgba(0, 0, 0, 0);
+  border-left: 5px solid rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  opacity: .9;
+  margin: 0 auto;
+  border-radius: 40px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  -o-border-radius: 40px;
+  top: -90px;
+  position: relative;
+  -moz-animation: spinoffPulse 10s infinite linear;
+  -webkit-animation: spinoffPulse 10s infinite linear;
+}
+.small-whirlpool .whirlpool-small-circle {
+  box-shadow: 0 0 6px #2187e7;
+  width: 60px;
+  height: 60px;
+  border: 2.4px solid rgba(0, 183, 229, 0.9);
+  border-right: 5px solid rgba(0, 0, 0, 0);
+  border-left: 5px solid rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
+  opacity: .9;
+  margin: 0 auto;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -o-border-radius: 30px;
+  top: -160px;
+  position: relative;
+  opacity: 0.5;
+  -moz-animation: reverseSpinoffPulse 20s infinite linear;
+  -webkit-animation: reverseSpinoffPulse 20s infinite linear;
+}
+@-moz-keyframes spinPulse {
+  0% {
+    -moz-transform: rotate(160deg);
+    opacity: 0;
+    box-shadow: 0 0 1px #2187e7;
+  }
+  50% {
+    -moz-transform: rotate(145deg);
+    opacity: 1;
+  }
+  100% {
+    -moz-transform: rotate(-320deg);
+    opacity: 0;
+  }
+}
+@-moz-keyframes spinoffPulse {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes reverseSpinoffPulse {
+  0% {
+    -moz-transform: rotate(360deg);
+  }
+  100% {
+    -moz-transform: rotate(0deg);
+  }
+}
+@-webkit-keyframes spinPulse {
+  0% {
+    -webkit-transform: rotate(160deg);
+    opacity: 0;
+    box-shadow: 0 0 1px #2187e7;
+  }
+  25% {
+    -webkit-transform: rotate(145deg);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: rotate(-320deg);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes spinoffPulse {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes reverseSpinoffPulse {
+  0% {
+    -webkit-transform: rotate(360deg);
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+  }
+}

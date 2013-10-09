@@ -1,0 +1,201 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>css bling by steve brownlee | digital reasoning</title>
+
+    <meta name="description" content="impress.js is a presentation tool based on the power of CSS3 transforms and transitions in modern browsers and inspired by the idea behind prezi.com." />
+    <meta name="author" content="Steve Brownlee" />
+
+    <link href='http://fonts.googleapis.com/css?family=Metal+Mania' rel='stylesheet' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="css/impress-demo.css" rel="stylesheet" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+
+<body class="impress-not-supported">
+
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<!--
+    To change the duration of the transition between slides use `data-transition-duration="2000"` giving it
+    a number of ms. It defaults to 1000 (1s).
+
+    You can also control the perspective with `data-perspective="500"` giving it a number of pixels.
+    https://developer.mozilla.org/en/CSS/perspective
+-->
+<div id="impress">
+
+    <!--
+        Each step of the presentation should be an element inside the `#impress` with a class name
+        of `step`. These step elements are positioned, rotated and scaled by impress.js, and
+        the 'camera' shows them on each step of the presentation.
+
+        In the example below we only specify x and y position of the step element with `data-x="-1000"`
+        and `data-y="-1500` attributes. This means that **the center** of the element (yes, the center)
+        will be positioned in point x = -1000px and y = -1500px of the presentation 'canvas'.
+    -->
+    <div id="intro" class="step slide" data-x="0" data-y="0" data-z="10000" data-rotate-x="0" data-rotate-y="0" data-scale="1">
+        <h1><img id="bling" src="images/Bling-Glitters.gif" /></h1>
+    </div>
+
+    <div id="title" class="step" data-x="2000" data-y="0" data-z="5000" data-rotate-x="0" data-rotate-y="0" data-scale="1">
+        <div id="about">hi, i'm steve</div>
+        <div class="footnote"><sup>*</sup> @nashvillecoder</div>
+        <div class="footnote"><sup>*</sup> <a href="https://www.vizify.com/steve-brownlee" target="_blank">https://www.vizify.com/steve-brownlee</a></div>
+        <div class="footnote"><sup>*</sup> Works @ Digital Reasoning (psst, we're hiring)</div>
+    </div>
+
+    <div id="family" class="step" data-x="2000" data-y="-1000" data-z="1000" data-rotate-x="0" data-rotate-y="0" data-scale="1">
+        <div id="about">my girls</div>
+        <img src="images/my-girls.jpg" />
+    </div>
+
+
+    <div id="bd-start" class="step" data-x="4000" data-y="-1000" data-z="1000" data-rotate-x="0" data-rotate-y="0" data-scale="1">
+        <h1>CSS3</h1>
+        <p>
+            <sup>High user experience impact baked into the browser</sup>
+        </p>
+    </div>
+
+    <div id="compiled-css" class="step" data-x="4000" data-y="0" data-z="1000" data-rotate-x="0" data-rotate-y="0" data-scale="1">
+        <p class='medium-text'>Compile your CSS.</p>
+        <p class='medium-text'>Use Less.</p>
+    </div>
+
+    <div id="compiled-css-1" class="step" data-x="4000" data-y="0" data-z="1000" data-rotate-x="0" data-rotate-y="0" data-scale="1">
+        <p class='medium-text'>No, really. Use Less.</p>
+        <p class='x-small-text'><a href="http://lesscss.org" target="_blank">http://lesscss.org/</a></p>
+        <p class='x-small-text'><a href="http://wearekiss.com/simpless" target="_blank">http://wearekiss.com/simpless</a></p>
+    </div>
+
+    <div id="css-topics-1" class="step" data-x="4000" data-y="0" data-z="1000" data-rotate-x="0" data-rotate-y="0" data-scale="1">
+        <p class='medium-text'>CSS3 enhancements you'll probably use</p>
+    </div>
+
+    <div id="css-topics-2" class="step" data-x="4000" data-y="300" data-z="1000" data-rotate-x="45" data-rotate-y="0" data-scale="1">
+        <p class='medium-text'>border-radius</p>
+        <p class='x-small-text'>making rounded corners that we used to make images for</p>
+        <div class="rounded-corners">Santa Maria</div>
+    </div>
+
+    <div id="css-topics-3" class="step" data-x="4000" data-y="600" data-z="1000" data-rotate-x="90" data-rotate-y="0" data-scale="1">
+        <p class='medium-text'>gradients</p>
+        <p class='x-small-text'>another thing we used to make images for</p>
+        <div class="rounded-corners gradient">Santa Maria</div>
+    </div>
+
+    <div id="css-topics-4" class="step" data-x="4000" data-y="900" data-z="1000" data-rotate-x="135" data-rotate-y="0" data-scale="1">
+        <p class='medium-text shadowed-text'>box-shadow</p>
+        <p class='x-small-text'>like obiwan, more powerful than you can possibly imagine</p>
+        <div class="chequered"></div>
+    </div>
+
+    <div id="css-topics-6" class="step" data-x="4000" data-y="1200" data-z="1000" data-rotate-x="180" data-rotate-y="0" data-scale="1">
+        <p class='medium-text'>font-face</p>
+        <p class='x-small-text'>custom font sets rendered by the browser</p>
+        <div class="web-font">Santa Maria</div>
+    </div>
+
+    <div id="css-topics-7" class="step" data-x="4000" data-y="1200" data-z="1000" data-rotate-x="225" data-rotate-y="0" data-scale="1">
+        <p class='medium-text'>transitions</p>
+        <p class='x-small-text'>changing element properties... over time</p>
+        <div class="rounded-corners transition">Santa Maria</div>
+    </div>
+
+    <div id="css-topics-8" class="step" data-x="4000" data-y="1500" data-z="1000" data-rotate-x="270" data-rotate-y="0" data-scale="1">
+        <p class='medium-text'>transformations</p>
+        <p class='x-small-text'>bending and twisting elements</p>
+        <div class="rounded-corners transformed">Santa Maria</div>
+    </div>
+
+
+    <div id="css-topics-9" class="step" data-x="6000" data-y="0" data-z="1000" data-rotate-x="0" data-rotate-y="0" data-scale="1">
+        <p class='medium-text'>CSS3 enhancements you'll want to use, but rarely will</p>
+    </div>
+
+    <div id="css-topics-10" class="step" data-x="6000" data-y="300" data-z="1000" data-rotate-x="90" data-rotate-y="0" data-scale="1">
+        <p class='medium-text'>filters</p>
+        <p class='x-small-text'>think instagram, but with only CSS</p>
+        <div style="margin: 0 auto;">
+            <img style="margin-right: 80px" src="images/colorful.jpg" />
+            <img class="filtered" src="images/colorful.jpg" />
+        </div>
+    </div>
+
+    <div id="css-topics-11" class="step" data-x="6000" data-y="600" data-z="1000" data-rotate-x="180" data-rotate-y="0" data-scale="1">
+        <p class='medium-text'>animations</p>
+        <p class='x-small-text'>creating rich, interactive experiences</p>
+        <div class="rounded-corners animated">Santa Maria</div>
+    </div>
+
+    <div id="css-topics-12" class="step" data-x="6000" data-y="600" data-z="1000" data-rotate-x="180" data-rotate-y="0" data-scale="1">
+        <div id="loading-div" class="large-whirlpool">
+            <div class="whirlpool-outer-circle"></div>
+            <div class="whirlpool-inner-circle"></div>
+            <div class="whirlpool-small-circle"></div>
+            <div class="whirlpool-text">Resolving</div>
+        </div>
+    </div>
+
+
+    <div id="example-time" class="step" data-x="0" data-y="0" data-z="1000" data-rotate-x="0" data-rotate-y="0" data-scale="2">
+        <p class="large-text stop-sign"></p>
+    </div>
+    
+    <div id="psa" class="step" data-x="0" data-y="0" data-z="1000" data-rotate-x="0" data-rotate-y="0" data-scale="2">
+        <p class="x-large-text blue">Community</p>
+        <p class="small-text">Nashville Software School</p>
+        <p class="x-small-text">nashvillesoftwareschool.com</p>
+    </div>
+
+    <div id="links" class="step" data-x="0" data-y="0" data-z="1000" data-rotate-x="0" data-rotate-y="0" data-scale="2">
+        <p class="medium-text">Helpful links</p>
+        
+        <p class="x-small-text">github.com/chortlehoort/css-bling</p>
+        <p class="xx-small-text">css3.com</p>
+        <p class="xx-small-text">westciv.com/tools/transforms/index.html</p>
+        <p class="xx-small-text">colorzilla.com/gradient-editor</p>
+        <p class="xx-small-text">html.adobe.com/webstandards/csscustomfilters/cssfilterlab</p>
+    </div>
+
+
+
+
+
+
+
+    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+    </div>
+
+</div>
+
+<!--
+
+    Last, but not least.
+
+    To make all described above really work, you need to include impress.js in the page.
+    I strongly encourage to minify it first.
+
+    In here I just include full source of the script to make it more readable.
+
+    You also need to call a `impress().init()` function to initialize impress.js presentation.
+    And you should do it in the end of your document. Not only because it's a good practice, but also
+    because it should be done when the whole document is ready.
+    Of course you can wrap it in any kind of "DOM ready" event, but I was too lazy to do so ;)
+
+-->
+<script src="scripts/impress.js"></script>
+<script>impress().init();</script>
+
+</body>
+</html>
+
+

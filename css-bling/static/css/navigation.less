@@ -1,0 +1,67 @@
+nav {
+    clear: both;
+}
+
+body > div {
+    clear: both;
+    padding: 20px 50px;
+}
+
+@box-shadow: 3px 3px 5px #0c0c0c;
+
+nav div {
+    border: 2px solid #141414;
+
+    float: left;
+    padding: 5px 15px;
+    margin: 0 10px;
+    width: 100px;
+    cursor: pointer;
+
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+    
+    -moz-box-shadow: @box-shadow;
+    -webkit-box-shadow: @box-shadow;
+    box-shadow: @box-shadow;
+    /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+    
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffd154', endColorstr = '#ffe84f');
+    /*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+    /*Element must have a height (not auto)*/
+    /*All filters must be placed together*/
+    
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffd154', endColorstr = '#ffe84f')";
+    /*Element must have a height (not auto)*/
+    /*All filters must be placed together*/
+    
+    background-image: -moz-linear-gradient(top, #ffd154, #ffe84f);
+    background-image: -ms-linear-gradient(top, #ffd154, #ffe84f);
+    background-image: -o-linear-gradient(top, #ffd154, #ffe84f);
+    background-image: -webkit-gradient(linear, center top, center bottom, from(#ffd154), to(#ffe84f));
+    background-image: -webkit-linear-gradient(top, #ffd154, #ffe84f);
+    background-image: linear-gradient(top, #ffd154, #ffe84f);
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    /*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+    /*--IE9 WILL PLACE THE FILTER ON TOP OF THE ROUNDED CORNERS--*/
+
+    @speed: 0.25s;
+
+    -webkit-transition: 
+       background-color @speed ease-in-out,
+       width @speed ease-in;
+    -moz-transition: 
+       background-color @speed ease-in-out,
+       width @speed ease-in;
+    -o-transition: 
+       background-color @speed ease-in-out,
+       width @speed ease-in;
+}
+
+nav div:hover {
+    width: 200px;
+};
