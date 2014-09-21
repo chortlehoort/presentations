@@ -1,0 +1,41 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../lp-service/event-service.html">
+<link rel="import" href="../lp-card/event-card.html">
+
+<polymer-element name="event-list" attributes="show">
+  <template>
+    <style>
+    :host {
+      display: block;
+      width: 100%;
+    }
+    event-card {
+      margin-bottom: 30px;
+    }
+    </style>
+
+    <event-service id="service" events="{{events}}"></event-service>
+
+    <div layout vertical center>
+      <template repeat="{{event in events}}">
+        <event-card
+          favorite="{{event.favorite}}"
+          on-favorite-tap="{{handleFavorite}}"
+          hidden?="{{show !== 'list'}}">
+          <img src="{{event.avatar}}" width="70" height="70">
+          <h2>{{event.summary}}</h2>
+          <div>{{event.description}}</div>
+        </event-card>
+      </template>
+    </div>
+  </template>
+
+  <script>
+  Polymer({
+    handleFavorite: function(event, detail, sender) {
+      var event = sender.templateInstance.model.event;
+      this.$.service.setFavorite(event.uid, event.favorite);
+    }
+  });
+  </script>
+</polymer-element>

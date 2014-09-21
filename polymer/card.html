@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <!-- 1. Load platform.js for polyfill support. -->
+    <script src="components/platform/platform.js"></script>
+
+    <!-- 2. Import our very own web component -->
+    <link rel="import" href="components/lp-card/event-card.html">
+
+    <style>
+    html,body {
+      height: 100%;
+      margin: 0;
+      background-color: #E5E5E5;
+    }
+    .container {
+      width: 80%;
+      margin: 0 auto;
+    }
+    </style>
+
+  </head>
+
+  <body>
+    <div class="container" layout vertical center>
+      <event-card
+          favorite="true"
+          on-favorite-tap="{{handleFavorite}}">
+        <img src="images/avatar-01.svg" width="70" height="70">
+        <h2>Coderfaire</h2>
+        <div>The best tech conference in Tennessee</div>
+        <div>
+          <span class="start-time"> 11:00am </span>
+          -
+          <span class="end-time"> 11:30am </span>
+          <div class="date"> 10/01/2015 </div>
+        </div>
+      </event-card>
+    </div>
+
+    <script>
+    var tabs = document.querySelector('event-card');
+
+    Polymer({
+      handleFavorite: function(event, detail, sender) {
+        var event = sender.templateInstance.model.event;
+        this.$.service.setFavorite(event.uid, event.favorite);
+      }
+    });
+    </script>
+  </body>
+</html>

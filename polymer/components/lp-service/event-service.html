@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../core-ajax/core-ajax.html">
+
+<polymer-element name="event-service" attributes="events">
+
+  <template>
+    <style>
+    :host {
+      display: none;
+    }
+    </style>
+
+    <core-ajax id="ajax"
+      auto
+      url="../../api/events.json"
+      on-core-response="{{eventsLoaded}}"
+      handleAs="json">
+    </core-ajax>
+  </template>
+
+  <script>
+  Polymer('event-service', {
+    created: function() {
+      this.events = [];
+    },
+    eventsLoaded: function() {
+      // Make a copy of the loaded data
+      this.events = this.$.ajax.response.slice(0);
+    },
+    setFavorite: function(uid, isFavorite) {
+      // no service backend, just log the change
+      console.log('Favorite changed: ' + uid + ", now: " + isFavorite);
+    }
+  });
+  </script>
+</polymer-element>

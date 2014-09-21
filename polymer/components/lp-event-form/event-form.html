@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+
+<polymer-element name="event-form" attributes="show">
+  <template>
+    <style>
+    :host {
+      display: block;
+      position: relative;
+      background-color: white;
+      padding: 20px;
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+    </style>
+
+    <div class="container" hidden?="{{show !== 'create'}}" layout vertical center>
+      <paper-input label="Event title"></paper-input>
+      <paper-input label="Event description"></paper-input>
+      <paper-input label="Start time"></paper-input>
+      <paper-input label="End time"></paper-input>
+      <paper-input label="Date"></paper-input>
+      <paper-button label="Save event"></paper-button>
+    </div>
+
+  </template>
+
+  <script>
+  Polymer({});
+  </script>
+
+</polymer-element>
