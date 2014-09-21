@@ -1,4 +1,4 @@
-mobilejs
+Introduction to Polymer
 ========
 
-Presentation on mobile development in JavaScript for Nashville Coderfaire 2013
+Presentation on Google Polymer for Tennessee Coderfaire 2014
